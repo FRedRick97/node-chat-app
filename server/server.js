@@ -14,14 +14,15 @@ var io = socketIO(server);
 io.on('connection', (socket) => {
 	console.log('New user connected');
 
-	socket.emit('newMessage', {
-		from: 'mike',
-		text: 'hey bro',
-		createdAt: 1234
-	});
-
+	// socket.io emits an event to a single connection & emit.io emits to every single connection
 	socket.on('createMessage', (message) => {
 		console.log('createMessage', message);
+		// print to every user
+		io.emit('newMessage', {
+			from: message.from,
+			text: message.to,
+			createdAt: new Date().getTime()
+		});
 	});
 
 	socket.on('disconnect', () => {

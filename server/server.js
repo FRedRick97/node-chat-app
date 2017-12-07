@@ -18,13 +18,16 @@ io.on('connection', (socket) => {
 
 	socket.emit('newMessage', {
 		from: 'Admin',
-		text: 'Welcome to the chat app'
+		text: 'Welcome to the chat app',
+		createdAt: new Date().getTime()
 	});
 
 	// socket.broadcast.emit from admit text new user joined
 	socket.broadcast.emit('newMessage', {
 		from: 'Admin',
-		text: 'New user joined'
+		text: 'New user joined',
+		createdAt: new Date().getTime()
+		
 	});
 
 	// socket.io emits an event to a single connection & emit.io emits to every single connection
